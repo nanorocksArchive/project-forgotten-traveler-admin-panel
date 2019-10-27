@@ -1,13 +1,14 @@
 <?php
 
 return [
-
     'displayErrorDetails' => true,
     'addContentLengthHeader'=> false,
     'db' => [
-        'host' => 'localhost',
-        'user' => 'user',
-        'pass' => 'password',
-        'dbname' => 'dbname'
+        'type' => 'sqlite',
+        'filename' => 'database.db'
+    ],
+    'logs' => [
+        'error' => __DIR__ . '/../logs/error.log',
+        'database' => __DIR__ . '/../logs/database.log'
     ]
 ];

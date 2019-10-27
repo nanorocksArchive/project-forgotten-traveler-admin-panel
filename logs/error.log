@@ -1,1 +1,2 @@
-[2019-10-18T19:17:33.091262+02:00] request_logger.INFO: hello from /hello/{name} [] []
+[2019-10-18T22:19:45.456875+02:00] error.ERROR: err msg [] []
+[2019-10-18T22:21:15.473332+02:00] server.ERROR: err msg [] []
