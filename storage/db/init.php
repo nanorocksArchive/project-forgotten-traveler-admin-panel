@@ -21,7 +21,7 @@ $db->setConnection();
 
 // Migrations here
 $users = require_once __DIR__ . '/../migration/usersMigration.php';
-$levels = require_once __DIR__ . '/../migration/levelsMIgration.php';
+$levels = require_once __DIR__ . '/../migration/levelsMigration.php';
 $scores = require_once __DIR__ . '/../migration/scoresMigration.php';
 
 // Create tables

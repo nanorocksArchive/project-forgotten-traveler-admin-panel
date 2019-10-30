@@ -77,4 +77,10 @@ class Database
             echo $e;
         }
     }
+
+    public function insertInto($table, $data)
+    {
+
+    }
+
 }
