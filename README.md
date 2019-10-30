@@ -23,7 +23,7 @@ API for android game build with PHP
  - total_stars
 
 ##### for users use token (jwt):
-	insert new users
+	register new users
 	check_login and return id if true
 	count_total users (no jwt)
 	edit user info 

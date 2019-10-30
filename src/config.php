@@ -4,7 +4,7 @@ return [
     'displayErrorDetails' => true,
     'addContentLengthHeader'=> false,
     'db' => [
-        'type' => 'sqlite',
+        'drive' => 'sqlite',
         'filename' => 'database.db'
     ],
     'logs' => [

@@ -1,13 +1,32 @@
 <?php
 
-
 // Container and dependencies
 $container = $app->getContainer();
 
+// Database access
+require_once __DIR__ . '/../storage/db/class/Database.php';
+$container['db'] = function ($container){
+
+    $db = new Database(
+        $container->get('settings')['db']['drive'],
+        __DIR__ . '/../storage',
+        $container->get('settings')['db']['filename']
+    );
+
+    $db->setConnection();
+    return $db;
+};
+
 // Controllers
+$container[\App\Controller\BaseController::class] = function ($container) {
+    return new \App\Controller\BaseController($container);
+};
+
 $container[\App\Controller\UserController::class] = function ($container) {
     return new \App\Controller\UserController($container);
 };
+
+
 
 // Container for error logs
 //$container['logger-error'] = function($c) use ($config) {
@@ -26,6 +45,6 @@ $container[\App\Controller\UserController::class] = function ($container) {
 //};
 
 // Container for JsonWebToken Middleware
-//$container['jwt'] = function ($c) use ($config) {
-//    return \App\Middleware\JwtMiddleware::class;
-//};
+$container['jwt'] = function ($container) {
+    return \App\Middleware\JwtMiddleware::class;
+};
