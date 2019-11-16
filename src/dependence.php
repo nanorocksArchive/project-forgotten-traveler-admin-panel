@@ -48,3 +48,14 @@ $container[\App\Controller\UserController::class] = function ($container) {
 $container['jwt'] = function ($container) {
     return \App\Middleware\JwtMiddleware::class;
 };
+
+// Twig template engine
+$container['twig'] = function ($container) {
+    $loader = new \Twig\Loader\FilesystemLoader($container->get('settings')['template']['path']);
+    $twig = new \Twig\Environment($loader, [
+        'cache' => false//$container->get('settings')['template']['cache'],
+    ]);
+    return $twig;
+};
+
+

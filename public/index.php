@@ -10,4 +10,6 @@ require_once __DIR__ . '/../src/dependence.php';
 
 require_once __DIR__ . '/../src/route/api.php';
 
+require_once __DIR__ . '/../src/route/web.php';
+
 $app->run();
