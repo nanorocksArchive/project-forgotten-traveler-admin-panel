@@ -26,9 +26,10 @@ API for android game build with PHP
 	register new users
 	check_login and return id if true
 	count_total users (no jwt)
-	edit user info 
+	edit user info
+	forgot password 
 
-##### for levels no jwt:
+##### for levels full stack:
 	insert level
 	edit level
 	select for all levels
