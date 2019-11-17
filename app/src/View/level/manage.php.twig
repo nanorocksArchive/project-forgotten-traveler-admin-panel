@@ -1,0 +1,44 @@
+{% extends "/layout/template.php.twig" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <div class="content pb-5 mb-5 mt-5">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container text-center">
+                <h1 class="display-4">Total users: <span>20</span></h1>
+            </div>
+        </div>
+        <div class="container">
+            <h2 class="text-center pb-4">Manage game levels</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12 shadow-sm mb-4 p-4">
+                    <a class="btn btn-block btn-primary text-uppercase" href="/new-level">new level</a>
+                    <a class="btn btn-block btn-primary text-uppercase" href="/dashboard">dashboard</a>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-12 shadow-sm mb-4 p-4 pl-0 pr-0">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="coins">Total coints</label>
+                            <input type="number" class="form-control" id="coints" name="coints" aria-describedby="coints">
+                        </div>
+                        <div class="form-group">
+                            <label for="stars">Total stars</label>
+                            <input type="number" class="form-control" id="stars" name="stars" aria-describedby="stars">
+                        </div>
+                        <button type="submit" class="btn btn-primary text-uppercase">save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

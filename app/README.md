@@ -11,12 +11,11 @@ API for android game build with PHP
 #### scores
  - id_user
  - id_level 
- - level
  - coints
  - stars
  - time
 
-#### levels
+#### levels for web
  - id_level
  - name
  - total_coints
@@ -25,7 +24,6 @@ API for android game build with PHP
 ##### for users use token (jwt):
 	register new users
 	check_login and return id if true
-	count_total users (no jwt)
 	edit user info
 	forgot password 
 
@@ -33,10 +31,23 @@ API for android game build with PHP
 	insert level
 	edit level
 	select for all levels
+	count_total users
 
 ##### for scores (jwt):
-	- insert
+	- insert for mobile (jwt)
 	- select all info for scores for user with id and id level (jwt)
 
 ##### for user-score:
 	- agregate function for total_score_user, total_coints_user, total_stars_user (jwt)
+	this is for mobile
+
+
+# alpine-php-docker-devbox
+Devbox with alpine-apache2-php7 only 40MB
+
+
+### To build use:
+###### `docker build -t nanorocks/alpine-devbox -f docker/server/Dockerfile .`
+
+### To run:
+###### `docker run -d -v $(pwd)/app:/var/www/localhost/ --name apache -p 80:80 nanorocks/alpine-devbox`

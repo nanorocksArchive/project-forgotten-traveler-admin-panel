@@ -5,7 +5,6 @@ return '
 CREATE TABLE IF NOT EXISTS "scores" (
 	"id_user" INTEGER,
 	"id_level" INTEGER,
-	"level"	VARCHAR(255) NOT NULL,
 	"coints" INTEGER DEFAULT 0,
 	"stars"	INTEGER DEFAULT 0,
 	"time"	VARCHAR(255),

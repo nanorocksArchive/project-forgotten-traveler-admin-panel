@@ -1,0 +1,50 @@
+{% extends "/layout/template.php.twig" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <div class="content pb-5 mb-5 mt-5">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container text-center">
+                <h1 class="display-4">Total users: <span>20</span></h1>
+            </div>
+        </div>
+        <div class="container">
+            <h2 class="text-center pb-4">Manage game levels</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12 shadow-sm mb-4 p-4">
+                   <a class="btn btn-block btn-primary text-uppercase" href="/new-level">new level</a>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 col-12 shadow-sm mb-4 p-4 pl-0 pr-0">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Total coints</th>
+                                <th scope="col">Total stars</th>
+                                <th scope="col">Edit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td><a class="btn btn-sm btn-primary text-light text-uppercase" href="/edit/level/1">Edit</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
