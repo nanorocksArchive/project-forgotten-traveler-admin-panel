@@ -1,6 +1,8 @@
 <?php
 
 // Container and dependencies
+use Tuupola\Middleware\HttpBasicAuthentication;
+
 $container = $app->getContainer();
 
 // Database access
