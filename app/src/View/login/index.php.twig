@@ -5,26 +5,27 @@
 {% endblock %}
 {% block content %}
     <div class="content">
-        <div class="container mt-5 pt-5">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-10 offset-sm-1 col-12">
-                    <div class="card p-4 shadow-lg">
-                        <img src="/img/logo.png" alt="logo" class="d-block mx-auto img-fluid" style="border-radius: 20px">
-                        <p class="text-center h4 font-weight-light mb-3">
+                    <div class="card p-4 shadow-lg rounded-0">
+                        <img src="/img/small-logo.png" alt="logo" class="d-block mx-auto img-fluid rounded-circle">
+                        <strong class="text-center font-acme">Nort Art Games</strong>
+                        <p class="text-center h4 font-weight-light mb-3 font-sil">
                             Forgotten Traveler</p>
-                        <form>
+                        <form class="font-acme">
                             <div class="form-group">
-                                <input type="email" class="form-control is-invalid" id="exampleInputEmail1"
+                                <input type="email" class="form-control rounded-pill is-invalid" id="email"
                                        aria-describedby="emailHelp" placeholder="Enter email">
                             </div>
                             <div class="form-group pb-2">
-                                <input type="password" class="form-control is-invalid" id="exampleInputPassword1"
+                                <input type="password" class="form-control rounded-pill is-invalid" id="password"
                                        placeholder="Password">
                             </div>
-                            <div class="alert alert-danger mt-3 small text-center" role="alert">
+                            <div class="alert alert-danger mt-3 small text-center rounded-pill" role="alert">
                                 Invalid email or password
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block font-weight-bolder">LOGIN</button>
+                            <button type="submit" class="btn btn-dark btn-block rounded-pill font-weight-bolder">LOGIN</button>
                         </form>
                     </div>
                 </div>
@@ -34,4 +35,16 @@
 {% endblock %}
 {% block footer %}
     {{ parent() }}
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('#password').on('input', function () {
+                $(this).removeClass('is-invalid');
+            });
+            $('#email').on('input', function () {
+                $(this).removeClass('is-invalid');
+            });
+        });
+    </script>
 {% endblock %}

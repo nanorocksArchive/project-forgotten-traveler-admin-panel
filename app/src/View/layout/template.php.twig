@@ -6,12 +6,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Forgotten Traveler {% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Acme|Shadows+Into+Light&display=swap" rel="stylesheet">
+    <style>
+        .font-sil{
+            font-family: 'Shadows Into Light', cursive;
+        }
+        .font-acme{
+            font-family: 'Acme', sans-serif;
+        }
+    </style>
 </head>
 <body>
 {% block header %}
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <a class="navbar-brand" href="/dashboard">Forgotten Traveler</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top font-acme">
+            <a class="navbar-brand" href="/dashboard">
+                <img src="/img/small-logo.png" alt="logo" class="img-fluid rounded-circle" style="width: 40px;">
+                <span style="position: relative; top: 5px;">Forgotten Traveler</span>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,22 +34,30 @@
                         <a class="nav-link" href="#">Howdy, Andrej</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-primary my-2 my-sm-0 btn-sm" href="/logout">Logout</a>
+                        <a class="btn btn-outline-dark my-2 my-sm-0 btn-sm text-uppercase rounded-0" href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
 {% endblock %}
+
 {% block content %}
+    {% block jumbotron %}
+        <div class="jumbotron jumbotron-fluid font-acme" style="background: url('/img/logo.png');">
+            <div class="container text-center">
+                <h1 class="display-4"><span class="badge badge-dark">Total USERS: 20</span></h1>
+            </div>
+        </div>
+    {% endblock %}
 ...
 {% endblock %}
 {% block footer %}
 <footer>
-    <div class="small">
+    <div class="small font-acme">
         <ul class="nav justify-content-center fixed-bottom navbar navbar-expand-lg navbar-light bg-light">
             <li class="nav-item">
-                Developed by <a href="https://github.com/nanorocks" target="_blank">nanorocks</a>
+                Developed with <span class="text-danger">&#10084;</span> by <a href="https://github.com/nanorocks" target="_blank">nanorocks</a>
             </li>
         </ul>
     </div>
@@ -54,5 +74,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+{% block js %}
+{% endblock %}
 </body>
 </html>
