@@ -11,24 +11,54 @@ class UserController extends BaseController
 {
     use UserVerification;
 
+    /**
+     * Loading view for login
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
     public function index(RequestInterface $request, ResponseInterface $response, $args = [])
     {
-        return $this->container['twig']->render('login/index.php.twig', []);
+        return $this->container['twig']->render($response, 'login/index.php.twig', []);
     }
 
     public function loginWeb(RequestInterface $request, ResponseInterface $response, $args = [])
     {
 
+        var_dump($request->getParsedBody());
+
+        // set params
+
+        // validate params
+
+        // check user in db
+
+        // login user
+
+        // redirect user
+
     }
+
+
 
     public function dashboard(RequestInterface $request, ResponseInterface $response, $args = [])
     {
-        return $this->container['twig']->render('dashboard/index.php.twig', []);
+        return $this->container['twig']->render($response, 'dashboard/index.php.twig', []);
     }
 
+    /**
+     * Loading view for new level form
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
     public function newLevelWeb(RequestInterface $request, ResponseInterface $response, $args = [])
     {
-        return $this->container['twig']->render('level/manage.php.twig', []);
+        return $this->container['twig']->render($response, 'level/manage.php.twig', []);
     }
 
     public function editLevelWeb()
