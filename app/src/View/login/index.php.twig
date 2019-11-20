@@ -13,13 +13,14 @@
                         <strong class="text-center font-acme">Nort Art Games</strong>
                         <p class="text-center h4 font-weight-light mb-3 font-sil">
                             Forgotten Traveler</p>
-                        <form class="font-acme">
+                        <form method="post" action="{{ path_for('login.page') }}" class="font-acme" >
                             <div class="form-group">
-                                <input type="email" class="form-control rounded-pill is-invalid" id="email"
+                                <input type="email" name="email" class="form-control rounded-pill is-invalid" id="email"
                                        aria-describedby="emailHelp" placeholder="Enter email">
+                                <span class="small text-danger pl-3" id="email-err">Input is not an email</span>
                             </div>
                             <div class="form-group pb-2">
-                                <input type="password" class="form-control rounded-pill is-invalid" id="password"
+                                <input type="password" name="password" class="form-control rounded-pill is-invalid" id="password"
                                        placeholder="Password">
                             </div>
                             <div class="alert alert-danger mt-3 small text-center rounded-pill" role="alert">
@@ -44,6 +45,7 @@
             });
             $('#email').on('input', function () {
                 $(this).removeClass('is-invalid');
+                $("#email-err").addClass('d-none');
             });
         });
     </script>
