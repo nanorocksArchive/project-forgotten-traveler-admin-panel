@@ -5,8 +5,8 @@ namespace App\Middleware;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class AuthMiddleware{
-
+class GuestMiddleware
+{
     public $container;
 
     public function __construct(\Slim\Container $container)
@@ -19,13 +19,14 @@ class AuthMiddleware{
         $session = $this->container['session'];
         $exists = $session->exists('user');
 
-        if($exists)
-        {
-            return $response->withRedirect('/dashboard');
-        }
+//        if(!$exists)
+//        {
+//            return $response->withRedirect('/');
+//        }
 
         $response = $next($request, $response);
         return $response;
     }
 }
+
 
