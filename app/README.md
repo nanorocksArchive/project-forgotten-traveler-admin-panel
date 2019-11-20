@@ -26,6 +26,7 @@ API for android game build with PHP
 	check_login and return id if true
 	edit user info
 	forgot password 
+	select for all levels
 
 ##### for levels full stack:
 	insert level
