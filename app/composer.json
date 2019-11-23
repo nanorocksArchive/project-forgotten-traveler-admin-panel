@@ -7,7 +7,8 @@
         "slim/twig-view": "^2.5.0",
         "psr/container": "^1.0",
         "bryanjhv/slim-session": "~3.0",
-        "illuminate/database": "^6.5"
+        "illuminate/database": "^6.5",
+        "illuminate/events": "^6.5"
     },
     "autoload": {
         "psr-4": {
