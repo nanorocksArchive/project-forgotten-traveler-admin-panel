@@ -53,15 +53,16 @@ $container['twig'] = function ($container) {
 };
 // --------------------------------------------------------------
 
-
 // Database ORM
-$container['db'] = function ($container) {
-    $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($container['settings']['db']);
+$capsule = new \Illuminate\Database\Capsule\Manager;
+$capsule->addConnection($container['settings']['db']);
 
-    $capsule->setAsGlobal();
-    $capsule->bootEloquent();
+$capsule->setEventDispatcher(new Illuminate\Events\Dispatcher(new  Illuminate\Container\Container));
 
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
+$container['db'] = function () use ($capsule) {
     return $capsule;
 };
 // --------------------------------------------------------------
