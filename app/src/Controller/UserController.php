@@ -119,5 +119,7 @@ class UserController extends BaseController
 
     public function totalApi(RequestInterface $request, ResponseInterface $response, $args = [])
     {
+
+
     }
 }

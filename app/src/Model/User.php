@@ -14,16 +14,22 @@ class User{
 
     protected $totalTime;
 
-    public function __construct($username, $password, $email, $totalTime)
+    protected $container;
+
+    public function __construct($container)
     {
-        $this->username = $username;
-        $this->password = $password;
-        $this->email = $email;
-        $this->totalTime = $totalTime;
+        $this->container = $container['db'];
     }
 
     public function store()
     {
         return 1;
     }
+
+    public function userCheck($email, $password)
+    {
+        var_dump($this->container);
+    }
+
+
 }
