@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Helper\UserVerification;
+use App\Model\Admin;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use App\Model\User;
@@ -27,7 +28,17 @@ class UserController extends BaseController
     public function loginWeb(RequestInterface $request, ResponseInterface $response, $args = [])
     {
 
-        var_dump($request->getParsedBody());
+//        $admin = new Admin([
+//            'email' => 'email@gmail.com',
+//            'password' => 'password123'
+//        ]);
+
+
+        //var_dump($this->container['db']->table('admins')->get());
+
+        var_dump(Admin::all());
+        die();
+        //var_dump($request->getParsedBody());
 
         // set params
 
@@ -77,10 +88,10 @@ class UserController extends BaseController
 
         //$this->validateRegistration($user);
 
-        $user = new User($username, md5($password), $email, $totalTime);
-        $success = $user->store();
+//        $user = new User($username, md5($password), $email, $totalTime);
+//        $success = $user->store();
 
-        if(!$success)
+        if(!1)
         {
             return $response->withJson([
                 'message' => "There is a CONFLICT",
