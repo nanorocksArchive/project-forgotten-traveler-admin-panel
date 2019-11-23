@@ -65,19 +65,3 @@ $container['db'] = function ($container) {
     return $capsule;
 };
 // --------------------------------------------------------------
-
-
-// Database access
-//require_once __DIR__ . '/../storage/db/class/Database.php';
-//$container['db'] = function ($container){
-//
-//    $db = new Database(
-//        $container->get('settings')['db']['drive'],
-//        __DIR__ . '/../storage',
-//        $container->get('settings')['db']['filename']
-//    );
-//
-//    $db->setConnection();
-//    return $db;
-//};
-

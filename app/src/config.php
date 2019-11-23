@@ -13,10 +13,6 @@ return [
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
     ],
-//    'db-old' => [
-//        'drive' => 'sqlite',
-//        'filename' => 'database.db'
-//    ],
     'logs' => [
         'error' => __DIR__ . '/../logs/error.log',
         'database' => __DIR__ . '/../logs/database.log'
