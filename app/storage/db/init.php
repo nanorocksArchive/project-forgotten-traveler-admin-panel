@@ -1,30 +1,17 @@
 <?php
 
+require __DIR__ . '/../../vendor/autoload.php';
+
+use Illuminate\Database\Capsule\Manager as DB;
+
+$capsule = new DB;
 $config = require_once __DIR__ . '/../../src/config.php';
 
-require_once __DIR__ . '/class/Database.php';
-
-$db = new Database(
-    $config['db']['drive'],
-    __DIR__,
-    $config['db']['filename']
-);
-
-// To recreate db
-if ($db->DbExist())
+try{
+    $capsule->addConnection($config['db']);
+}catch (Exception $e)
 {
-    $db->deleteDB();
-    $db->createDB();
+    die('There is a problem with db connection.');
 }
 
-$db->setConnection();
-
-// Migrations here
-$users = require_once __DIR__ . '/../migration/usersMigration.php';
-$levels = require_once __DIR__ . '/../migration/levelsMigration.php';
-$scores = require_once __DIR__ . '/../migration/scoresMigration.php';
-
-// Create tables
-$db->createTable($users, 'users');
-$db->createTable($levels, 'levels');
-$db->createTable($scores, 'scores');
+$capsule->setAsGlobal();
