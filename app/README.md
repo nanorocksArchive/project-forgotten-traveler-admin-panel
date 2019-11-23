@@ -51,4 +51,4 @@ Devbox with alpine-apache2-php7 only 40MB
 ###### `docker build -t nanorocks/alpine-devbox -f docker/server/Dockerfile .`
 
 ### To run:
-###### `docker run -d -v $(pwd)/app:/var/www/localhost/ --name apache -p 80:80 nanorocks/alpine-devbox`
+###### `docker run -d -v $(pwd)/app:/var/www/localhost/ --name apache -p 8080:80 nanorocks/alpine-devbox`
