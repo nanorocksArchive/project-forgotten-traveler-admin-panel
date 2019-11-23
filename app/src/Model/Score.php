@@ -2,17 +2,10 @@
 
 namespace App\Model;
 
-class Score {
+use Illuminate\Database\Eloquent\Model;
 
-    protected $idUser;
+class Score extends Model {
 
-    protected $idLevel;
+    protected $table = 'scores';
 
-    protected $level;
-
-    protected $coints;
-
-    protected $stars;
-
-    protected $time;
 }

@@ -2,34 +2,11 @@
 
 namespace App\Model;
 
-class User{
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-    protected $id;
+class User extends Eloquent {
 
-    protected $username;
+    protected $table='users';
 
-    protected $password;
-
-    protected $email;
-
-    protected $totalTime;
-
-    protected $container;
-
-    public function __construct($container)
-    {
-        $this->container = $container['db'];
-    }
-
-    public function store()
-    {
-        return 1;
-    }
-
-    public function userCheck($email, $password)
-    {
-        var_dump($this->container);
-    }
-
-
+    protected $fillable = ['email', 'username'];
 }

@@ -2,14 +2,9 @@
 
 namespace App\Model;
 
-class Level {
+use Illuminate\Database\Eloquent\Model;
 
-    protected $id;
+class Level extends Model {
 
-    protected $name;
-
-    protected $totalCoints;
-
-    protected $totalStars;
-
+    protected $table = 'levels';
 }
