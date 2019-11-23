@@ -2,15 +2,19 @@
 
 // Container and dependencies
 $container = $app->getContainer();
+// --------------------------------------------------------------
+
 
 // Controllers here
-$container[\App\Controller\BaseController::class] = function ($container) {
+$container['BaseController'] = function ($container) {
     return new \App\Controller\BaseController($container);
 };
 
-$container[\App\Controller\UserController::class] = function ($container) {
+$container['UserController'] = function ($container) {
     return new \App\Controller\UserController($container);
 };
+// --------------------------------------------------------------
+
 
 // Middleware here
 $container['GuestMiddleware'] = function ($container) {
@@ -21,20 +25,22 @@ $container['AuthMiddleware'] = function ($container) {
     return new \App\Middleware\AuthMiddleware($container);
 };
 
-// Session here
-$container['session'] = function ($container) {
-    return new \SlimSession\Helper;
-};
-
-
-// Container for JsonWebToken Middleware
-$container['jwt'] = function ($container) {
+$container['jwt'] = function () {
     return \App\Middleware\JwtMiddleware::class;
 };
+// --------------------------------------------------------------
 
-// Twig template engine
+
+// Service here
+$container['session'] = function () {
+    return new \SlimSession\Helper;
+};
+// --------------------------------------------------------------
+
+
+// Template engine
 $container['twig'] = function ($container) {
-    $view = new \Slim\Views\Twig($container->get('settings')['template']['path'], [
+    $view = new \Slim\Views\Twig($container['settings']['template']['path'], [
         'cache' => false//$container->get('settings')['template']['cache'],
     ]);
 
@@ -45,17 +51,33 @@ $container['twig'] = function ($container) {
 
     return $view;
 };
+// --------------------------------------------------------------
+
+
+// Database ORM
+$container['db'] = function ($container) {
+    $capsule = new \Illuminate\Database\Capsule\Manager;
+    $capsule->addConnection($container['settings']['db']);
+
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
+
+    return $capsule;
+};
+// --------------------------------------------------------------
+
 
 // Database access
-require_once __DIR__ . '/../storage/db/class/Database.php';
-$container['db'] = function ($container){
+//require_once __DIR__ . '/../storage/db/class/Database.php';
+//$container['db'] = function ($container){
+//
+//    $db = new Database(
+//        $container->get('settings')['db']['drive'],
+//        __DIR__ . '/../storage',
+//        $container->get('settings')['db']['filename']
+//    );
+//
+//    $db->setConnection();
+//    return $db;
+//};
 
-    $db = new Database(
-        $container->get('settings')['db']['drive'],
-        __DIR__ . '/../storage',
-        $container->get('settings')['db']['filename']
-    );
-
-    $db->setConnection();
-    return $db;
-};

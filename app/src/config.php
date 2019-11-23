@@ -4,9 +4,19 @@ return [
     'displayErrorDetails' => true,
     'addContentLengthHeader'=> false,
     'db' => [
-        'drive' => 'sqlite',
-        'filename' => 'database.db'
+        'driver' => 'mysql',
+        'host' => '94.237.88.91',
+        'database' => 'nankovin_game',
+        'username' => 'nankovin_game',
+        'password' => 'confusionsnake32;',
+        'charset'   => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix'    => '',
     ],
+//    'db-old' => [
+//        'drive' => 'sqlite',
+//        'filename' => 'database.db'
+//    ],
     'logs' => [
         'error' => __DIR__ . '/../logs/error.log',
         'database' => __DIR__ . '/../logs/database.log'
