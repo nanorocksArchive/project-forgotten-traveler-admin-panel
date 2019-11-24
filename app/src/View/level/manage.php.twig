@@ -16,25 +16,49 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-12 shadow-sm mb-4 p-4">
-                    <a class="btn btn-block btn-dark text-uppercase rounded-pill font-acme" href="/new-level">new level <span>&#10010;</span></a>
-                    <a class="btn btn-block btn-dark text-uppercase rounded-pill font-acme" href="/dashboard">dashboard <span>&#10070;</span></a>
+                    <a class="btn btn-block btn-dark text-uppercase rounded-pill font-acme" href="{{ path_for('new.level') }}">new level <span>&#10010;</span></a>
+                    <a class="btn btn-block btn-dark text-uppercase rounded-pill font-acme" href="{{ path_for('dashboard') }}">dashboard <span>&#10070;</span></a>
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-12 col-12 shadow-sm mb-4 p-4 pl-0 pr-0">
-                    <form class="container font-acme">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" class="form-control rounded-pill" id="name" name="name" aria-describedby="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="coins">Total coints:</label>
-                            <input type="number" class="form-control rounded-pill" id="coints" name="coints" aria-describedby="coints">
-                        </div>
-                        <div class="form-group">
-                            <label for="stars">Total stars:</label>
-                            <input type="number" class="form-control rounded-pill" id="stars" name="stars" aria-describedby="stars">
-                        </div>
-                        <button type="submit" class="btn btn-outline-dark rounded-pill text-uppercase">save</button>
-                    </form>
+
+                    {% if level is defined %}
+
+                        <form method="post" action="{{ path_for('update.level', { 'id' : level.id}) }}" class="container font-acme">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control rounded-pill" id="name" name="name" aria-describedby="name" value="{{ level.name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="total_coins">Total coins:</label>
+                                <input type="number" class="form-control rounded-pill" id="total_coins" name="total_coins" aria-describedby="total_coins" value="{{ level.total_coins }}" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="total_stars">Total stars:</label>
+                                <input type="number" class="form-control rounded-pill" id="total_stars" name="total_stars" aria-describedby="total_stars" value="{{ level.total_stars }}" min="1" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-outline-dark rounded-pill text-uppercase">update</button>
+                        </form>
+
+                    {% else %}
+
+                        <form method="post" action="{{ path_for('new.level') }}" class="container font-acme">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control rounded-pill" id="name" name="name" aria-describedby="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="total_coins">Total coints:</label>
+                                <input type="number" class="form-control rounded-pill" id="total_coins" name="total_coins" aria-describedby="total_coins" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="total_stars">Total stars:</label>
+                                <input type="number" class="form-control rounded-pill" id="total_stars" name="total_stars" aria-describedby="total_stars" min="1" required>
+                            </div>
+                            <button type="submit" class="btn btn-outline-dark rounded-pill text-uppercase">save</button>
+                        </form>
+
+                    {% endif %}
                 </div>
             </div>
         </div>
