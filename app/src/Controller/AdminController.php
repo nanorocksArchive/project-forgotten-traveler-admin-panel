@@ -20,24 +20,39 @@ class AdminController extends BaseController
      */
     public function index(RequestInterface $request, ResponseInterface $response, $args = [])
     {
-        return $this->container['twig']->render($response, 'login/index.php.twig', []);
+        $msg = $this->container['flash']->getMessages();
+        return $this->container['twig']->render($response, 'login/index.php.twig', [
+            'msg' => $msg
+        ]);
     }
 
 
     public function loginWeb(RequestInterface $request, ResponseInterface $response, $args = [])
     {
 
-//        $admin = new Admin([
-//            'email' => 'email@gmail.com',
-//            'password' => 'password123'
-//        ]);
+        $requestParams = $request->getParsedBody();
+
+        $email = $requestParams['email'];
+        $password = $requestParams['password'];
+
+        // validate email and password
+
+        $admin = Admin::where('email', '=', $email)
+            ->where('password', '=', md5($password))
+            ->get()
+            ->toArray();
+
+        if(empty($admin))
+        {
+            $this->container['flash']->addMessage('alert-danger', 'invalid email or password');
+            return $response->withRedirect('/');
+        }
 
 
         //var_dump($this->container['db']->table('admins')->get());
 
         var_dump(Admin::all());
         die();
-        //var_dump($request->getParsedBody());
 
         // set params
 
@@ -48,6 +63,11 @@ class AdminController extends BaseController
         // login user
 
         // redirect user
+
+    }
+
+    public function logout(RequestInterface $request, ResponseInterface $response, $args = [])
+    {
 
     }
 

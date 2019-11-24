@@ -4,8 +4,7 @@ $app->get('/', \App\Controller\AdminController::class  . ':index');
 
 $app->post('/login', \App\Controller\AdminController::class . ':loginWeb')
     ->setName('login.page')
-    ->add(\App\Middleware\AuthMiddleware::class);
-
+    ->add(\App\Middleware\GuestMiddleware::class);
 
 $app->group('', function (){
 
@@ -18,4 +17,6 @@ $app->group('', function (){
     $this->post('/update/level/{id}', \App\Controller\AdminController::class . ':updateLevelWeb')->setName('update.level');
     $this->get('/delete/level/{id}', \App\Controller\AdminController::class . ':deleteLevelWeb')->setName('delete.level');
 
-})->add(\App\Middleware\GuestMiddleware::class);
+    $this->get('/logoutWeb', \App\Controller\AdminController::class . ':logout')->setName('logout.page');
+
+})->add(\App\Middleware\AuthMiddleware::class);
