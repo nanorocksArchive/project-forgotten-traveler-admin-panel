@@ -23,9 +23,11 @@
                                 <input type="password" name="password" class="form-control rounded-pill is-invalid" id="password"
                                        placeholder="Password">
                             </div>
-                            <div class="alert alert-danger mt-3 small text-center rounded-pill" role="alert">
-                                Invalid email or password
-                            </div>
+                            {% if msg is not empty %}
+                                <div class="alert small text-center rounded-pill fade show {{msg|keys[0]}}" role="alert" id="login-err">
+                                    {{ msg[msg|keys[0]][0]|trim }}
+                                </div>
+                            {% endif %}
                             <button type="submit" class="btn btn-dark btn-block rounded-pill font-weight-bolder">LOGIN</button>
                         </form>
                     </div>
@@ -42,10 +44,12 @@
         $(document).ready(function () {
             $('#password').on('input', function () {
                 $(this).removeClass('is-invalid');
+                $('#login-err').addClass('d-none');
             });
             $('#email').on('input', function () {
                 $(this).removeClass('is-invalid');
                 $("#email-err").addClass('d-none');
+                $('#login-err').addClass('d-none');
             });
         });
     </script>
