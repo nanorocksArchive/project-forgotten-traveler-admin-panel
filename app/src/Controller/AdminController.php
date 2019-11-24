@@ -63,9 +63,11 @@ class AdminController extends BaseController
 
         $levels = Level::all();
         $totalUsers = User::count();
+        $msg = $this->container['flash']->getMessages();
         return $this->container['twig']->render($response, 'dashboard/index.php.twig', [
             'totalUsers' => $totalUsers,
-            'levels' => $levels
+            'levels' => $levels,
+            'msg' => $msg
         ]);
     }
 
@@ -84,6 +86,11 @@ class AdminController extends BaseController
         return $this->container['twig']->render($response, 'level/manage.php.twig', [
             'totalUsers' => $totalUsers,
         ]);
+    }
+
+    public function storeNewLevelWeb(RequestInterface $request, ResponseInterface $response, $args = [])
+    {
+
     }
 
     /**
@@ -106,6 +113,14 @@ class AdminController extends BaseController
         ]);
     }
 
+    /**
+     * Update level
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
     public function updateLevelWeb(RequestInterface $request, ResponseInterface $response, $args = [])
     {
 
@@ -118,6 +133,7 @@ class AdminController extends BaseController
         $level->total_stars = $requestParams['total_stars'];
         $level->save();
 
+        $this->container['flash']->addMessage('alert-info', 'You update level with name: ' . $level->name);
         return $response->withRedirect('/dashboard');
     }
 }
