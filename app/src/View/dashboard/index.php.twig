@@ -34,6 +34,7 @@
                                 <th scope="col">Total coins</th>
                                 <th scope="col">Total stars</th>
                                 <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,7 +45,8 @@
                                 <td class="font-acme">{{ level.name }}</td>
                                 <td class="font-acme">{{ level.total_coins }}</td>
                                 <td class="font-acme">{{ level.total_stars }}</td>
-                                <td><a class="text-decoration-none" href="/edit/level/{{ level.id }}"><span class="h4">&#9997;</span></a></td>
+                                <td><a class="text-decoration-none" href="{{ path_for('edit.level', { 'id' : level.id }) }}"><span class="h4">&#9997;</span></a></td>
+                                <td><a class="text-decoration-none" onclick="deleteLevel(this,'{{ path_for('delete.level', { 'id' : level.id }) }}')" style="cursor: pointer;"><span class="h4 text-danger">&#10006;</span></a></td>
                             </tr>
                                 {% set flag = flag + 1 %}
                             {% endfor %}
@@ -58,4 +60,15 @@
 {% endblock %}
 {% block footer %}
     {{ parent() }}
+{% endblock %}
+{% block js %}
+    <script>
+        function deleteLevel(el, path)
+        {
+            if(confirm('Are you sure?'))
+            {
+                $(el).attr('href', path);
+            }
+        }
+    </script>
 {% endblock %}
