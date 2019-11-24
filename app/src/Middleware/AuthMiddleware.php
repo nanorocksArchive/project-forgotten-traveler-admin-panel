@@ -5,7 +5,7 @@ namespace App\Middleware;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class GuestMiddleware
+class AuthMiddleware
 {
     public $container;
 
@@ -16,13 +16,13 @@ class GuestMiddleware
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, $next)
     {
-        $session = $this->container['session'];
-        $exists = $session->exists('admin');
-
-        if(!$exists)
-        {
-            return $response->withRedirect('/');
-        }
+//        $session = $this->container['session'];
+//        $exists = $session->exists('admin');
+//
+//        if(!$exists)
+//        {
+//            return $response->withRedirect('/');
+//        }
 
         $response = $next($request, $response);
         return $response;
