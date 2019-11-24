@@ -14,28 +14,40 @@
             <hr align="left" class="w-50 pb-4">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-12 shadow-sm mb-4 p-4">
-                   <a class="btn btn-block btn-dark text-uppercase rounded-pill font-acme" href="/new-level">new level <span>&#10010;</span></a>
+                   <a class="btn btn-block btn-dark text-uppercase rounded-pill font-acme" href="{{ path_for('new.level') }}">new level <span>&#10010;</span></a>
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-12 col-12 shadow-sm mb-4 p-4 pl-0 pr-0">
+                    {% if msg is not empty %}
+                    <div class="alert rounded-0 font-acme alert-dismissible fade show {{msg|keys[0]}}" role="alert">
+                        {{ msg[msg|keys[0]][0] }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-dark">
                             <tr class="font-sil">
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Total coints</th>
+                                <th scope="col">Total coins</th>
                                 <th scope="col">Total stars</th>
                                 <th scope="col">Edit</th>
                             </tr>
                             </thead>
                             <tbody>
+                            {% set flag = 1 %}
+                            {% for level in levels %}
                             <tr>
-                                <th class="font-acme">1</th>
-                                <td class="font-acme">Mark</td>
-                                <td class="font-acme">Otto</td>
-                                <td class="font-acme">@mdo</td>
-                                <td><a class="text-decoration-none" href="/edit/level/1"><span class="h4">&#9997;</span></a></td>
+                                <th class="font-acme">{{ flag }}</th>
+                                <td class="font-acme">{{ level.name }}</td>
+                                <td class="font-acme">{{ level.total_coins }}</td>
+                                <td class="font-acme">{{ level.total_stars }}</td>
+                                <td><a class="text-decoration-none" href="/edit/level/{{ level.id }}"><span class="h4">&#9997;</span></a></td>
                             </tr>
+                                {% set flag = flag + 1 %}
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
