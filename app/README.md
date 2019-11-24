@@ -27,10 +27,12 @@ API for android game build with PHP
 	edit user info
 	forgot password 
 	select for all levels
+	update total_time
 
 ##### for levels full stack:
 	insert level
 	edit level
+	delete level
 	select for all levels
 	count_total users
 
