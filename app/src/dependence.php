@@ -13,6 +13,10 @@ $container['BaseController'] = function ($container) {
 $container['UserController'] = function ($container) {
     return new \App\Controller\UserController($container);
 };
+
+$container['AdminController'] = function ($container) {
+    return new \App\Controller\AdminController($container);
+};
 // --------------------------------------------------------------
 
 
@@ -34,6 +38,10 @@ $container['jwt'] = function () {
 // Service here
 $container['session'] = function () {
     return new \SlimSession\Helper;
+};
+
+$container['flash'] = function () {
+    return new \Slim\Flash\Messages();
 };
 // --------------------------------------------------------------
 
@@ -57,7 +65,7 @@ $container['twig'] = function ($container) {
 $capsule = new \Illuminate\Database\Capsule\Manager;
 $capsule->addConnection($container['settings']['db']);
 
-$capsule->setEventDispatcher(new Illuminate\Events\Dispatcher(new  Illuminate\Container\Container));
+$capsule->setEventDispatcher(new Illuminate\Events\Dispatcher(new Illuminate\Container\Container));
 
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
