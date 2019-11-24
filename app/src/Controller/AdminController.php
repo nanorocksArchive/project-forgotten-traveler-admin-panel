@@ -23,6 +23,7 @@ class AdminController extends BaseController
         return $this->container['twig']->render($response, 'login/index.php.twig', []);
     }
 
+
     public function loginWeb(RequestInterface $request, ResponseInterface $response, $args = [])
     {
 
@@ -88,9 +89,32 @@ class AdminController extends BaseController
         ]);
     }
 
+    /**
+     * Store new level
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
     public function storeNewLevelWeb(RequestInterface $request, ResponseInterface $response, $args = [])
     {
+        $requestParams = $request->getParsedBody();
 
+        $level = new Level();
+        $level->name = $requestParams['name'];
+        $level->total_stars = $requestParams['total_stars'];
+        $level->total_coins = $requestParams['total_coins'];
+        $success = $level->save();
+
+        if($success)
+        {
+            $this->container['flash']->addMessage('alert-success', 'You add new level with name: ' . $level->name);
+            return $response->withRedirect('/dashboard');
+        }
+
+        $this->container['flash']->addMessage('alert-warning', 'Something went wrong. Adding new level is not success.');
+        return $response->withRedirect('/dashboard');
     }
 
     /**
@@ -131,9 +155,39 @@ class AdminController extends BaseController
         $level->name = $requestParams['name'];
         $level->total_coins = $requestParams['total_coins'];
         $level->total_stars = $requestParams['total_stars'];
-        $level->save();
+        $success = $level->save();
 
-        $this->container['flash']->addMessage('alert-info', 'You update level with name: ' . $level->name);
+        if($success)
+        {
+            $this->container['flash']->addMessage('alert-info', 'You update level with name: ' . $level->name);
+            return $response->withRedirect('/dashboard');
+        }
+
+        $this->container['flash']->addMessage('alert-warning', 'Something went wrong. Update is not success.');
+        return $response->withRedirect('/dashboard');
+    }
+
+    /**
+     * Delete level
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
+    public function deleteLevelWeb(RequestInterface $request, ResponseInterface $response, $args = [])
+    {
+        $levelId = $args['id'];
+        $level = Level::find($levelId);
+        $success = $level->delete();
+
+        if($success)
+        {
+            $this->container['flash']->addMessage('alert-danger', 'You delete level with name: ' . $level->name);
+            return $response->withRedirect('/dashboard');
+        }
+
+        $this->container['flash']->addMessage('alert-warning', 'Something went wrong. Deleting level is not success.');
         return $response->withRedirect('/dashboard');
     }
 }
