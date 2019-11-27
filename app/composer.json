@@ -9,7 +9,8 @@
         "bryanjhv/slim-session": "~3.0",
         "illuminate/database": "^6.5",
         "illuminate/events": "^6.5",
-        "slim/flash": "^0.4.0"
+        "slim/flash": "^0.4.0",
+        "rakit/validation": "^1.2"
     },
     "autoload": {
         "psr-4": {
