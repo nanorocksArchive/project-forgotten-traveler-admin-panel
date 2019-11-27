@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use App\Helper\UserVerification;
 use App\Model\Admin;
 use App\Model\Level;
 use App\Model\User;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Slim\Middleware\Session;
 
 class AdminController extends BaseController
 {
+    use UserVerification;
+
     /**
      * Loading view for login
      *
@@ -36,6 +40,15 @@ class AdminController extends BaseController
         $password = $requestParams['password'];
 
         // validate email and password
+        $errors = UserVerification::validateWebLogin($requestParams);
+
+        if (!empty($errors))
+        {
+            return $this->container['twig']->render($response, 'login/index.php.twig', [
+                'err' => $errors,
+                'request' => $requestParams
+            ]);
+        }
 
         $admin = Admin::where('email', '=', $email)
             ->where('password', '=', md5($password))
@@ -44,31 +57,27 @@ class AdminController extends BaseController
 
         if(empty($admin))
         {
-            $this->container['flash']->addMessage('alert-danger', 'invalid email or password');
+            $this->container['flash']->addMessage('alert-danger', 'Invalid email or password');
             return $response->withRedirect('/');
         }
 
-
-        //var_dump($this->container['db']->table('admins')->get());
-
-        var_dump(Admin::all());
-        die();
-
-        // set params
-
-        // validate params
-
-        // check user in db
-
         // login user
+        $session = $this->container['session'];
+        $setAdmin = $session->set('admin', [
+            'email' => $email,
+            'password' => $password
+        ]);
 
-        // redirect user
-
+        return $response->withRedirect('/dashboard');
     }
 
     public function logout(RequestInterface $request, ResponseInterface $response, $args = [])
     {
+        $session = $this->container['session'];
+        $logout = $session->delete('admin');
 
+        $this->container['flash']->addMessage('alert-success', 'You are logout.');
+        return $response->withRedirect('/');
     }
 
     /**

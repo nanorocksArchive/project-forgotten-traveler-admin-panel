@@ -2,19 +2,34 @@
 
 namespace App\Helper;
 
-use Respect\Validation\Validator;
+use Rakit\Validation\Validator;
 
 trait UserVerification {
 
-    // Move this to trait in helper
-    public static function validateRegistration($user)
+    public static function validateWebLogin($params)
     {
-        // Validate body request
-        $username = Validator::attribute('username', Validator::stringType()->length(8, 32));
-        $password = Validator::attribute('password', Validator::stringType()->length(8, 32));
-        $email = Validator::attribute('email', Validator::email());
+        $validator = new Validator;
 
-        var_dump($username->validate($user));
+        $validation = $validator->make($params, [
+            'email'                 => 'required|email',
+            'password'              => 'required|min:6',
+        ]);
+
+        $validation->validate();
+
+        if($validation->fails())
+        {
+            $errors = $validation->errors()->toArray();
+            $msgErrors = [];
+            foreach ($errors as $key => $errMsg)
+            {
+                $msgErrors[$key] = array_values($errMsg);
+            }
+
+            return $msgErrors;
+        }
+
+        return [];
     }
 
 
