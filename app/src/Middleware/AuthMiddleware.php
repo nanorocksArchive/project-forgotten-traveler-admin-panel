@@ -16,13 +16,13 @@ class AuthMiddleware
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, $next)
     {
-//        $session = $this->container['session'];
-//        $exists = $session->exists('admin');
-//
-//        if(!$exists)
-//        {
-//            return $response->withRedirect('/');
-//        }
+        $session = $this->container['session'];
+        $exists = $session->exists('admin');
+
+        if(!$exists)
+        {
+            return $response->withRedirect('/');
+        }
 
         $response = $next($request, $response);
         return $response;
