@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Helper\UserVerification;
+use App\Helper\AdminValidation;
 use App\Model\Admin;
 use App\Model\Level;
 use App\Model\User;
@@ -12,7 +12,7 @@ use Slim\Middleware\Session;
 
 class AdminController extends BaseController
 {
-    use UserVerification;
+    use AdminValidation;
 
     /**
      * Loading view for login
@@ -40,7 +40,7 @@ class AdminController extends BaseController
         $password = $requestParams['password'];
 
         // validate email and password
-        $errors = UserVerification::validateWebLogin($requestParams);
+        $errors = AdminValidation::validateWebLogin($requestParams);
 
         if (!empty($errors))
         {

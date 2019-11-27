@@ -4,7 +4,7 @@ namespace App\Helper;
 
 use Rakit\Validation\Validator;
 
-trait UserVerification {
+trait AdminValidation {
 
     public static function validateWebLogin($params)
     {
