@@ -49,12 +49,15 @@ $container['flash'] = function () {
 // Template engine
 $container['twig'] = function ($container) {
     $view = new \Slim\Views\Twig($container['settings']['template']['path'], [
-        'cache' => false//$container->get('settings')['template']['cache'],
+        'cache' => false,//$container->get('settings')['template']['cache'],
     ]);
+
+    $view->offsetSet('session', $_SESSION);
 
     // Instantiate and add Slim specific extension
     $router = $container->get('router');
-    $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
+    $twigEnv = new \Slim\Http\Environment($_SERVER);
+    $uri = \Slim\Http\Uri::createFromEnvironment($twigEnv);
     $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
 
     return $view;

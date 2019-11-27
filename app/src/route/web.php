@@ -17,6 +17,6 @@ $app->group('', function (){
     $this->post('/update/level/{id}', \App\Controller\AdminController::class . ':updateLevelWeb')->setName('update.level');
     $this->get('/delete/level/{id}', \App\Controller\AdminController::class . ':deleteLevelWeb')->setName('delete.level');
 
-    $this->get('/logoutWeb', \App\Controller\AdminController::class . ':logout')->setName('logout.page');
+    $this->get('/logout', \App\Controller\AdminController::class . ':logout')->setName('logout.page');
 
 })->add(\App\Middleware\AuthMiddleware::class);
