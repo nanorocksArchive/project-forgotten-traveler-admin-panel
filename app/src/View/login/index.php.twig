@@ -15,13 +15,18 @@
                             Forgotten Traveler</p>
                         <form method="post" action="{{ path_for('login.page') }}" class="font-acme">
                             <div class="form-group">
-                                <input type="email" name="email" class="form-control rounded-pill is-invalid" id="email"
-                                       aria-describedby="emailHelp" placeholder="Enter email">
-                                <span class="small text-danger pl-3" id="email-err">Input is not an email</span>
+                                <input type="email" name="email" class="form-control rounded-pill {% if err.email is not empty %}is-invalid{% endif %}" id="email"
+                                       aria-describedby="emailHelp" placeholder="Enter email" value="{{ request['email'] }}">
+                                {% if err.email is not empty %}
+                                <span class="small text-danger pl-3" id="email-err">{{ err.email[0] }}</span>
+                                {% endif %}
                             </div>
                             <div class="form-group pb-2">
-                                <input type="password" name="password" class="form-control rounded-pill is-invalid" id="password"
-                                       placeholder="Password">
+                                <input type="password" name="password" class="form-control rounded-pill {% if err.password is not empty %}is-invalid{% endif %}" id="password"
+                                       placeholder="Password" value="{{ request['password'] }}">
+                                {% if err.password is not empty %}
+                                    <span class="small text-danger pl-3" id="password-err">{{ err.password[0] }}</span>
+                                {% endif %}
                             </div>
                             {% if msg is not empty %}
                                 <div class="alert small text-center rounded-pill fade show {{msg|keys[0]}}" role="alert" id="login-err">
@@ -45,6 +50,7 @@
             $('#password').on('input', function () {
                 $(this).removeClass('is-invalid');
                 $('#login-err').addClass('d-none');
+                $("#password-err").addClass('d-none');
             });
             $('#email').on('input', function () {
                 $(this).removeClass('is-invalid');

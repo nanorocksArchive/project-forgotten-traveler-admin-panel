@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Helper\UserVerification;
 use App\Model\Admin;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -10,7 +9,6 @@ use App\Model\User;
 
 class UserController extends BaseController
 {
-    use UserVerification;
 
     public function registerApi(RequestInterface $request, ResponseInterface $response, $args = [])
     {
