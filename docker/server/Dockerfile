@@ -37,4 +37,4 @@ CMD ["-D", "FOREGROUND"]
 # docker build -t nanorocks/alpine-devbox -f docker/server/Dockerfile .
 
 # to run:
-# docker run -d -v $(pwd)/app:/var/www/localhost/ --name apache -p 80:80 nanorocks/alpine-devbox
+# docker run --rm -d -v $(pwd)/app:/var/www/localhost/ --name apache -p 80:80 nanorocks/alpine-devbox
