@@ -29,25 +29,15 @@ API for android game build with PHP
 	select for all levels
 	update total_time
 
-##### for levels full stack:
-	insert level
-	edit level
-	delete level
-	select for all levels
-	count_total users
-
 ##### for scores (jwt):
 	- insert for mobile (jwt)
 	- select all info for scores for user with id and id level (jwt)
 
 ##### for user-score:
 	- agregate function for total_score_user, total_coints_user, total_stars_user (jwt)
-	this is for mobile
-
 
 # alpine-php-docker-devbox
 Devbox with alpine-apache2-php7 only 40MB
-
 
 ### To build use:
 ###### `docker build -t nanorocks/alpine-devbox -f docker/server/Dockerfile .`
