@@ -9,4 +9,6 @@ class User extends Eloquent {
     protected $table='users';
 
     protected $fillable = ['email', 'username'];
+
+    protected $hidden = ['password'];
 }
