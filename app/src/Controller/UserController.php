@@ -2,29 +2,52 @@
 
 namespace App\Controller;
 
-use App\Model\Admin;
+use App\Helper\UserRegistrationValidation;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use App\Model\User;
 
 class UserController extends BaseController
 {
+    use UserRegistrationValidation;
 
-    public function registerApi(RequestInterface $request, ResponseInterface $response, $args = [])
+    /**
+     * Register new user in api
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
+    public function registerUser(RequestInterface $request, ResponseInterface $response, $args = [])
     {
         $params = $request->getParams();
 
         $username = $params['username'];
         $password = $params['password'];
         $email = $params['email'];
-        $totalTime = $password['total-time'];
+        $totalTime = 0;
 
-        //$this->validateRegistration($user);
+        $errors = UserRegistrationValidation::validateRegistration($params);
 
-//        $user = new User($username, md5($password), $email, $totalTime);
-//        $success = $user->store();
+        if (!empty($errors))
+        {
+            return $response->withJson([
+                'message' => "Invalid data",
+                'err' => $errors,
+                'code' => 409
+            ], 409);
+        }
 
-        if(!1)
+        $user = new User();
+        $user->username = $username;
+        $user->password =  md5($password);
+        $user->email = $email;
+        $user->total_time = $totalTime;
+        $user->activation = 0;
+        $success = $user->save();
+
+        if(!$success)
         {
             return $response->withJson([
                 'message' => "There is a CONFLICT",
@@ -34,11 +57,11 @@ class UserController extends BaseController
 
         return $response->withJson([
             'message' => "User created",
-            'code' => 200
-        ], 200);
+            'code' => 201
+        ], 201);
     }
 
-    public function loginApi(RequestInterface $request, ResponseInterface $response, $args = [])
+    public function loginUser(RequestInterface $request, ResponseInterface $response, $args = [])
     {
 
     }

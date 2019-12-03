@@ -30,7 +30,14 @@ class AdminController extends BaseController
         ]);
     }
 
-
+    /**
+     * Login user form web form
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
     public function loginWeb(RequestInterface $request, ResponseInterface $response, $args = [])
     {
 
@@ -71,6 +78,14 @@ class AdminController extends BaseController
         return $response->withRedirect('/dashboard');
     }
 
+    /**
+     * User logout
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
     public function logout(RequestInterface $request, ResponseInterface $response, $args = [])
     {
         $session = $this->container['session'];
