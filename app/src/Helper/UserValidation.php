@@ -6,9 +6,15 @@ namespace App\Helper;
 use App\Model\User;
 use Rakit\Validation\Validator;
 
-trait UserRegistrationValidation
+trait UserValidation
 {
 
+    /**
+     * Validate registration
+     *
+     * @param $params
+     * @return array
+     */
     public static function validateRegistration($params)
     {
         $validator = new Validator();
@@ -46,6 +52,36 @@ trait UserRegistrationValidation
         }
 
         return $err;
+    }
+
+    /**
+     * Validate user before login
+     *
+     * @param $params
+     * @return array
+     */
+    public static function validateLogin($params)
+    {
+
+        $validator = new Validator();
+
+        $validation = $validator->make($params, [
+            'username' => 'required|alpha_num',
+            'password' => 'required|min:6',
+        ]);
+
+        $validation->validate();
+
+        if ($validation->fails()) {
+            $errors = $validation->errors()->toArray();
+            $msgErrors = [];
+            foreach ($errors as $key => $errMsg) {
+                $msgErrors[$key] = array_values($errMsg);
+            }
+
+            return $msgErrors;
+        }
+
     }
 
 
