@@ -84,5 +84,32 @@ trait UserValidation
 
     }
 
+    /**
+     * Validate new password
+     *
+     * @param $params
+     * @return array
+     */
+    public static function validateNewPassword($params)
+    {
 
+        $validator = new Validator();
+
+        $validation = $validator->make($params, [
+            'new-password' => 'required|min:6',
+        ]);
+
+        $validation->validate();
+
+        if ($validation->fails()) {
+            $errors = $validation->errors()->toArray();
+            $msgErrors = [];
+            foreach ($errors as $key => $errMsg) {
+                $msgErrors[$key] = array_values($errMsg);
+            }
+
+            return $msgErrors;
+        }
+
+    }
 }
