@@ -22,7 +22,7 @@ DB::table('users')->insert([
 DB::table('users')->insert([
     'email' => 'babic@gmail.com',
     'username' => 'babic123',
-    'password' => md5('babic'),
+    'password' => md5('babic321'),
     'total_time' => '0',
     'activation' => '1'
 ]);
