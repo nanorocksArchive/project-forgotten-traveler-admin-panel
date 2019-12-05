@@ -171,7 +171,6 @@ class UserController extends BaseController
 
         return $response->withJson([
             'message' => "Your password can't be changed",
-            'token' => '',
             'code' => 200
         ], 200);
     }
@@ -220,21 +219,70 @@ class UserController extends BaseController
             'message' => "Personal info",
             'data' => [
                 'username' => $username,
-                'email' => $user->email
+                'email' => $user->email,
+                'total_time' => $user->total_time
             ],
             'code' => 200
         ], 200);
     }
 
+    /**
+     * Update total time
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
+    public function totalTime(RequestInterface $request, ResponseInterface $response, $args = [])
+    {
+        $data = $request->getAttribute('jwsData');
+
+        $username = $data['payload']['username'];
+        $password = $data['payload']['password'];
+
+        $user = User::where('username', '=', $username)->where('password', '=', $password)->first();
+        if(!$user){
+            return $response->withJson([
+                'message' => "Invalid token",
+                'code' => 200
+            ], 200);
+        }
+
+        $params = $request->getParams();
+        $totalTime = $params['total-time'];
+
+        // validate total time
+        $errors = UserValidation::validateTotalTime($params);
+
+        if (!empty($errors))
+        {
+            return $response->withJson([
+                'message' => "Invalid data",
+                'err' => $errors,
+                'code' => 409
+            ], 409);
+        }
+
+        $user->total_time = $totalTime;
+        $success = $user->save();
+
+        if($success)
+        {
+            return $response->withJson([
+                'message' => "You update total time",
+                'code' => 200
+            ], 200);
+        }
+
+        return $response->withJson([
+            'message' => "Total time for user can't be changed",
+            'code' => 200
+        ], 200);
+    }
 
     public function forgotPasswordApi(RequestInterface $request, ResponseInterface $response, $args = [])
     {
-
-    }
-
-    public function totalApi(RequestInterface $request, ResponseInterface $response, $args = [])
-    {
-
 
     }
 }
