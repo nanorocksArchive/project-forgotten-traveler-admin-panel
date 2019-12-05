@@ -23,8 +23,9 @@ API for android game build with PHP
 
 ##### for users use token (jwt):
 	register new users
-	check_login and return id if true
-	edit user info
+	login user and return token
+	get (username, email) send token
+	update user info (change password)
 	forgot password 
 	select for all levels
 	update total_time
