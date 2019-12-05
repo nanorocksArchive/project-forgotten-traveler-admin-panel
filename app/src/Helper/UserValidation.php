@@ -92,11 +92,38 @@ trait UserValidation
      */
     public static function validateNewPassword($params)
     {
-
         $validator = new Validator();
 
         $validation = $validator->make($params, [
             'new-password' => 'required|min:6',
+        ]);
+
+        $validation->validate();
+
+        if ($validation->fails()) {
+            $errors = $validation->errors()->toArray();
+            $msgErrors = [];
+            foreach ($errors as $key => $errMsg) {
+                $msgErrors[$key] = array_values($errMsg);
+            }
+
+            return $msgErrors;
+        }
+
+    }
+
+    /**
+     * Validate total time
+     *
+     * @param $params
+     * @return array
+     */
+    public static function validateTotalTime($params)
+    {
+        $validator = new Validator();
+
+        $validation = $validator->make($params, [
+            'total-time' => 'required|numeric',
         ]);
 
         $validation->validate();
