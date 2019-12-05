@@ -120,18 +120,112 @@ class UserController extends BaseController
         ], 200);
     }
 
-    public function editApi(RequestInterface $request, ResponseInterface $response, $args = [])
+    /**
+     * Change new password
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
+    public function changePassword(RequestInterface $request, ResponseInterface $response, $args = [])
     {
+        $data = $request->getAttribute('jwsData');
+        $username = $data['payload']['username'];
+        $oldPassword = $data['payload']['password'];
 
-    }
+        $params = $request->getParams();
+        $newPassword = $params['new-password'];
 
-    public function logoutApi(RequestInterface $request, ResponseInterface $response, $args = [])
-    {
+        // validate new password
+        $errors = UserValidation::validateNewPassword($params);
+
+        if (!empty($errors))
+        {
+            return $response->withJson([
+                'message' => "Invalid data",
+                'err' => $errors,
+                'code' => 409
+            ], 409);
+        }
+
+        $user = User::where('username', '=', $username)->where('password', '=', $oldPassword)->first();
+        if(!$user){
+            return $response->withJson([
+                'message' => "Invalid token",
+                'code' => 200
+            ], 200);
+        }
+
+        $user->password = md5($newPassword);
+        $success = $user->save();
+
+        if($success)
+        {
+            return $response->withJson([
+                'message' => "Your password is changed",
+                'report' => "Delete token form client side and logout user",
+                'code' => 200
+            ], 200);
+        }
+
         return $response->withJson([
-            'message' => "Delete token form client side",
+            'message' => "Your password can't be changed",
+            'token' => '',
             'code' => 200
         ], 200);
     }
+
+    /**
+     * Logout user
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
+    public function logoutUser(RequestInterface $request, ResponseInterface $response, $args = [])
+    {
+        return $response->withJson([
+            'message' => "Your are logout",
+            'report' => "Delete token form client side and logout user",
+            'code' => 200
+        ], 200);
+    }
+
+    /**
+     * Personal info for user
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
+    public function personalInfo(RequestInterface $request, ResponseInterface $response, $args = [])
+    {
+        $data = $request->getAttribute('jwsData');
+
+        $username = $data['payload']['username'];
+        $password = $data['payload']['password'];
+
+        $user = User::where('username', '=', $username)->where('password', '=', $password)->first();
+        if(!$user){
+            return $response->withJson([
+                'message' => "Invalid token",
+                'code' => 200
+            ], 200);
+        }
+
+        return $response->withJson([
+            'message' => "Personal info",
+            'data' => [
+                'username' => $username,
+                'email' => $user->email
+            ],
+            'code' => 200
+        ], 200);
+    }
+
 
     public function forgotPasswordApi(RequestInterface $request, ResponseInterface $response, $args = [])
     {
