@@ -24,15 +24,15 @@ API for android game build with PHP
 ##### for users use token (jwt):
 	register new users
 	login user and return token
-	get (username, email) send token
+	get (username, email, activation) send token
 	update user info (change password)
-	forgot password 
 	select for all levels
 	update total_time
+    forgot password --
 
 ##### for scores (jwt):
-	- insert for mobile (jwt)
-	- select all info for scores for user with id and id level (jwt)
+	- insert for mobile (jwt) --
+	- select all info for scores for user with id and id level (jwt) --
 
 ##### for user-score:
 	- agregate function for total_score_user, total_coints_user, total_stars_user (jwt)
