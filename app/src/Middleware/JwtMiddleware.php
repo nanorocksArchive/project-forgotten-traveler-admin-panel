@@ -14,13 +14,14 @@ class JwtMiddleware
         $config = require __DIR__ . '/../config.php';
         $authorization = $request->getHeaders()["HTTP_AUTHORIZATION"][0];
         $verifyJws = 1;
+        $jwsData = null;
 
         if ($authorization != null) {
             $key = $config['jws']['key'];
             $jws = new JWS();
 
             try {
-                $authorization = str_replace($config['jws']['access'], '', $authorization);
+                $authorization = trim(str_replace($config['jws']['access'], '', $authorization));
                 $jwsData = $jws->verify($authorization, $key);
 
                 if (!is_array($jwsData)) {
@@ -45,7 +46,7 @@ class JwtMiddleware
         }
 
         if ($verifyJws) {
-            $response = $next($request, $response);
+            $response = $next($request->withAttribute('jwsData', $jwsData), $response);
             return $response;
 
         } else {
