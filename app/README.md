@@ -31,8 +31,8 @@ API for android game build with PHP
     forgot password --
 
 ##### for scores (jwt):
-	- insert for mobile (jwt) --
-	- select all info for scores for user with id and id level (jwt) --
+	- insert for mobile (jwt)
+	- select all info for scores for user with id(jwt)
 
 ##### for user-score:
 	- agregate function for total_score_user, total_coints_user, total_stars_user (jwt)
