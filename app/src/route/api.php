@@ -21,6 +21,11 @@ $app->group('/api/user', function () use ($app){
     $app->get('/total/score', \App\Controller\AnalyseController::class . ':totalScoreGamePlay')
         ->add(\App\Middleware\JwtMiddleware::class);
 
+    $app->post('/store/score', \App\Controller\ScoreController::class . ':store')
+        ->add(\App\Middleware\JwtMiddleware::class);
+
+    $app->get('/score', \App\Controller\ScoreController::class . ':getScore')
+        ->add(\App\Middleware\JwtMiddleware::class);
 });
 
 $app->get('/api/levels', \App\Controller\LevelController::class . ':showLevels')
