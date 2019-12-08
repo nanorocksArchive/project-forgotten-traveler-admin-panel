@@ -20,3 +20,6 @@ $app->group('', function (){
     $this->get('/logout', \App\Controller\AdminController::class . ':logout')->setName('logout.page');
 
 })->add(\App\Middleware\AuthMiddleware::class);
+
+
+$app->get('/activation/{token}', \App\Controller\UserController::class . ':activation');

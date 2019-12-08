@@ -30,3 +30,6 @@ $app->group('/api/user', function () use ($app){
 
 $app->get('/api/levels', \App\Controller\LevelController::class . ':showLevels')
     ->add(\App\Middleware\JwtMiddleware::class);
+
+$app->get('/api/forgot/password', \App\Controller\UserController::class . ':forgotPassword');
+
