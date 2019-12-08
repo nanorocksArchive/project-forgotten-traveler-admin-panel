@@ -6,7 +6,12 @@ use Rakit\Validation\Validator;
 
 trait AdminValidation
 {
-
+    /**
+     * Validate login panel
+     *
+     * @param $params
+     * @return array
+     */
     public static function validateWebLogin($params)
     {
         $validator = new Validator;
