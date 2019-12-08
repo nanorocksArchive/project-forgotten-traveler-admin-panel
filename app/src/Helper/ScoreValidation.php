@@ -8,7 +8,6 @@ use Rakit\Validation\Validator;
 
 trait ScoreValidation
 {
-
     /**
      * Validate registration
      *

@@ -139,4 +139,41 @@ trait UserValidation
         }
 
     }
+
+    /**
+     * Validate email
+     *
+     * @param $params
+     * @return array
+     */
+    public static function validateEmail($params)
+    {
+        $validator = new Validator();
+
+        $validation = $validator->make($params, [
+            'email' => 'required|email',
+        ]);
+
+        $validation->validate();
+
+        if ($validation->fails()) {
+            $errors = $validation->errors()->toArray();
+            $msgErrors = [];
+            foreach ($errors as $key => $errMsg) {
+                $msgErrors[$key] = array_values($errMsg);
+            }
+
+            return $msgErrors;
+        }
+
+        $err = [];
+
+        $user = User::where('email', '=', trim($params['email']))->first();
+        if (!$user)
+        {
+            $err['email'] = 'Email not exist';
+        }
+
+        return $err;
+    }
 }
