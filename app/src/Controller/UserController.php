@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Helper\MailSender;
 use App\Helper\UserValidation;
 use Gamegos\JWS\JWS;
 use Psr\Http\Message\RequestInterface;
@@ -11,6 +12,7 @@ use App\Model\User;
 class UserController extends BaseController
 {
     use UserValidation;
+    use MailSender;
 
     /**
      * Register new user in api
@@ -281,8 +283,32 @@ class UserController extends BaseController
         ], 200);
     }
 
-    public function forgotPasswordApi(RequestInterface $request, ResponseInterface $response, $args = [])
+    public function forgotPassword(RequestInterface $request, ResponseInterface $response, $args = [])
     {
+        $params = $request->getParams();
+        $email = $params['email'];
+
+        // validate email
+        $errors = UserValidation::validateTotalTime($params);
+        if (!empty($errors))
+        {
+            return $response->withJson([
+                'message' => "Invalid data",
+                'err' => $errors,
+                'code' => 409
+            ], 409);
+        }
+
+        $user = User::where('email', '=' , $email)->first();
+        $username = $user->username;
+        $email = $user->email;
+
+        $success = MailSender::send(
+            $username,
+            $email,
+            '$subject',
+            '$msg'
+        );
 
     }
 }
