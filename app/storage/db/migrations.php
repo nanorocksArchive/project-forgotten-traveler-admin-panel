@@ -22,6 +22,13 @@ DB::schema()->create('users', function ($table) {
     $table->timestamps();
 });
 
+DB::schema()->create('forgot_password', function ($table) {
+    $table->increments('id_user')->unsigned()->index();
+    $table->string('reset')->default(null);
+    $table->timestamps();
+    $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+});
+
 DB::schema()->create('levels', function ($table) {
     $table->increments('id')->index();
     $table->string('name');
@@ -40,6 +47,5 @@ DB::schema()->create('scores', function ($table) {
     $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
     $table->foreign('id_level')->references('id')->on('levels')->onDelete('cascade')->onUpdate('cascade');
 });
-
 
 die("\nMigrations done. Check DB.\n");
