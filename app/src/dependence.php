@@ -9,14 +9,6 @@ $container = $app->getContainer();
 $container['BaseController'] = function ($container) {
     return new \App\Controller\BaseController($container);
 };
-
-$container['UserController'] = function ($container) {
-    return new \App\Controller\UserController($container);
-};
-
-$container['AdminController'] = function ($container) {
-    return new \App\Controller\AdminController($container);
-};
 // --------------------------------------------------------------
 
 
