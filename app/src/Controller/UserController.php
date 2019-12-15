@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Helper\MailSender;
 use App\Helper\UserValidation;
+use App\Model\ForgotPassword;
 use Gamegos\JWS\JWS;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -289,7 +290,7 @@ class UserController extends BaseController
         $email = $params['email'];
 
         // validate email
-        $errors = UserValidation::validateTotalTime($params);
+        $errors = UserValidation::validateEmail($params);
         if (!empty($errors))
         {
             return $response->withJson([
@@ -301,14 +302,48 @@ class UserController extends BaseController
 
         $user = User::where('email', '=' , $email)->first();
         $username = $user->username;
-        $email = $user->email;
+
+        $http = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
+        $hash = bin2hex(openssl_random_pseudo_bytes(16));
+        $resetCode = sprintf('%s%s/reset/%s',
+            $http,
+            $_SERVER['HTTP_HOST'],
+            $hash
+        );
+
+        $fp = ForgotPassword::find($user->id);
+        if($fp == null)
+        {
+            $fp = new ForgotPassword();
+        }
+
+        $fp->reset = $hash;
+        $fp->id_user = $user->id;
+        $fp->save();
 
         $success = MailSender::send(
             $username,
             $email,
-            '$subject',
-            '$msg'
+            $resetCode
         );
 
+        if($success)
+        {
+            return $response->withJson([
+                'message' => "Check your email",
+                'code' => 200
+            ], 200);
+        }
+
+        return $response->withJson([
+            'message' => "Message not send contact admin",
+            'code' => 200
+        ], 200);
+    }
+
+
+    public function resetPassword(RequestInterface $request, ResponseInterface $response, $args = [])
+    {
+        return $this->container['twig']->render($response, 'user/forgot-password.php.twig', []);
     }
 }
