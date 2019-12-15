@@ -6,38 +6,40 @@ use \Mailjet\Resources;
 
 trait MailSender
 {
-    public static function send($username, $email, $subject, $msg)
+    public static function send($username, $email, $resetLink)
     {
         $config = require __DIR__ . '/../config.php';
 
         $mj = new \Mailjet\Client(
-            'd813129af503e903ff40fae06f65e57f',
-            '18c50ea2fb82dde307d66a0ef3460604',
-            true,
-            ['version' => 'v3.1']
+            $config['mail']['key'],
+            $config['mail']['secret'],
+            $config['mail']['call'],
+            $config['mail']['version']
         );
 
         $body = [
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => "bot@ftadmin.php.mk",
-                        'Name' => "Forgot password - Forgotten Traveler"
+                        'Email' => $config['mail']['senderEmail'],
+                        'Name' => $config['mail']['senderName']
                     ],
                     'To' => [
                         [
-                            'Email' => "andrejnankov@gmail.com",
-                            'Name' => "Andrej"
+                            'Email' => $email,
+                            'Name' => $username
                         ]
                     ],
-                    'Subject' => "Forgot password - Forgotten Traveler",
-                    'TextPart' => "My first Mailjet email",
-                    'HTMLPart' => "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
-                    'CustomID' => "AppGettingStartedTest"
+                    'Subject' => sprintf("%s - New password", $config['mail']['senderName']),
+                    'TextPart' => "",
+                    'HTMLPart' => "<a href='" . $resetLink . "'>New password</a>",
+                    'CustomID' => $config['mail']['customId']
                 ]
             ]
         ];
+
         $response = $mj->post(Resources::$Email, ['body' => $body]);
-        $response->success() && var_dump($response->getData());
+
+        return $response->success();
     }
 }
