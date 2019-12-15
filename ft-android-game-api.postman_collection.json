@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "4fe41521-607b-4e0d-a434-909daa40fd05",
+		"name": "ft-android-game-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Regiter",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"andrej122\",\n\t\"email\": \"andrejnankov@gmail.com\",\n\t\"password\": \"andrej123\"\n}"
+				},
+				"url": {
+					"raw": "localhost/api/user/register",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"andrej12\",\n\t\"password\": \"andrej321\"\n}"
+				},
+				"url": {
+					"raw": "localhost/api/user/login",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlajEyIiwicGFzc3dvcmQiOiI3MDQzMTY3OWI2MjQ0OTE2MTUxOWEwMzUwMWJlZTQ0MCJ9.wT_GZFG_M4khN3GXQOG9n7eYKpIAg9SaiuMGw7L0TQ8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/api/user/logout",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change password",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlajEyIiwicGFzc3dvcmQiOiI3MDQzMTY3OWI2MjQ0OTE2MTUxOWEwMzUwMWJlZTQ0MCJ9.wT_GZFG_M4khN3GXQOG9n7eYKpIAg9SaiuMGw7L0TQ8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"new-password\": \"andrej321\"\n}"
+				},
+				"url": {
+					"raw": "localhost/api/user/change/password",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"change",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show user info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmljMTIzIiwicGFzc3dvcmQiOiI3MDQzMTY3OWI2MjQ0OTE2MTUxOWEwMzUwMWJlZTQ0MCJ9.YzNXynEg8NbrDVAEBQrejkpmaZdUdRMeq3lNlVVt04s"
+					}
+				],
+				"url": {
+					"raw": "localhost/api/user/personal/info",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"personal",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all levels",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlajEyIiwicGFzc3dvcmQiOiIwMDBmZjk4Y2ZiZWM2NGZjMzU3MjllMDNiOTUxNGQ2ZiJ9.XvhSCgOuD21-5fhSKuAk-8IQXG8KBHLsJ29ZbXCS_dw"
+					}
+				],
+				"url": {
+					"raw": "localhost/api/levels",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"levels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update total-time for user gameplay",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlajEyIiwicGFzc3dvcmQiOiIwMDBmZjk4Y2ZiZWM2NGZjMzU3MjllMDNiOTUxNGQ2ZiJ9.XvhSCgOuD21-5fhSKuAk-8IQXG8KBHLsJ29ZbXCS_dw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"total-time\" : 21\n}"
+				},
+				"url": {
+					"raw": "localhost/api/user/total/time",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"total",
+						"time"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total score for user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmljMTIzIiwicGFzc3dvcmQiOiI3MDQzMTY3OWI2MjQ0OTE2MTUxOWEwMzUwMWJlZTQ0MCJ9.YzNXynEg8NbrDVAEBQrejkpmaZdUdRMeq3lNlVVt04s"
+					}
+				],
+				"url": {
+					"raw": "localhost/api/user/total/score",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"total",
+						"score"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store new score for user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmljMTIzIiwicGFzc3dvcmQiOiI3MDQzMTY3OWI2MjQ0OTE2MTUxOWEwMzUwMWJlZTQ0MCJ9.YzNXynEg8NbrDVAEBQrejkpmaZdUdRMeq3lNlVVt04s"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"level-id\":\"6\",\n\t\"coins\": 23,\n\t\"stars\" : 23,\n\t\"time\" : \"23:2\"\n}"
+				},
+				"url": {
+					"raw": "localhost/api/user/store/score",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"store",
+						"score"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all scores for user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmljMTIzIiwicGFzc3dvcmQiOiI3MDQzMTY3OWI2MjQ0OTE2MTUxOWEwMzUwMWJlZTQ0MCJ9.YzNXynEg8NbrDVAEBQrejkpmaZdUdRMeq3lNlVVt04s"
+					}
+				],
+				"url": {
+					"raw": "localhost/api/user/score",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"score"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot password",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmljMTIzIiwicGFzc3dvcmQiOiI3MDQzMTY3OWI2MjQ0OTE2MTUxOWEwMzUwMWJlZTQ0MCJ9.YzNXynEg8NbrDVAEBQrejkpmaZdUdRMeq3lNlVVt04s",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"andrejnankov@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost/api/forgot/password",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"forgot",
+						"password"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
