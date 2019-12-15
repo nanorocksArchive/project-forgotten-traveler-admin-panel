@@ -284,6 +284,14 @@ class UserController extends BaseController
         ], 200);
     }
 
+    /**
+     * Send mail with reset password link
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
     public function forgotPassword(RequestInterface $request, ResponseInterface $response, $args = [])
     {
         $params = $request->getParams();
