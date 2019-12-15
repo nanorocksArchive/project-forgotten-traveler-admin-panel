@@ -21,5 +21,4 @@ $app->group('', function (){
 
 })->add(\App\Middleware\AuthMiddleware::class);
 
-
-$app->get('/activation/{token}', \App\Controller\UserController::class . ':activation');
+$app->get('/reset/{token}', \App\Controller\UserController::class . ':resetPassword');
