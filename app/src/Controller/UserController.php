@@ -313,7 +313,7 @@ class UserController extends BaseController
 
         $http = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
         $hash = bin2hex(openssl_random_pseudo_bytes(16));
-        $resetCode = sprintf('%s%s/reset/%s',
+        $resetCode = sprintf('%s%s/password/%s',
             $http,
             $_SERVER['HTTP_HOST'],
             $hash
@@ -349,9 +349,35 @@ class UserController extends BaseController
         ], 200);
     }
 
-
-    public function resetPassword(RequestInterface $request, ResponseInterface $response, $args = [])
+    /**
+     * Add new password
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     */
+    public function enterPassword(RequestInterface $request, ResponseInterface $response, $args = [])
     {
-        return $this->container['twig']->render($response, 'user/forgot-password.php.twig', []);
+        $token = $args['token'];
+        $ft = ForgotPassword::where('reset', '=', $token)->first();
+        $expire = false;
+        if (!$ft) {
+            return $this->container['twig']->render($response, 'user/forgot-password.php.twig', [
+                'tokenExpire' => $expire
+            ]);
+        }
+
+        $forgotPassword = $ft->toArray();
+        $updatedDate = date('Y-m-d H:m:s', strtotime($forgotPassword['updated_at'] . ' +1 day'));
+        $today = date('Y-m-d H:m:s');
+        if(strtotime($updatedDate) <= strtotime($today))
+        {
+            $ft->delete();
+            $expire = true;
+        }
+        return $this->container['twig']->render($response, 'user/forgot-password.php.twig', [
+            'tokenExpire' => $expire
+        ]);
     }
 }

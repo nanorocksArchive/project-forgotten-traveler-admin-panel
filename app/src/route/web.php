@@ -21,4 +21,4 @@ $app->group('', function (){
 
 })->add(\App\Middleware\AuthMiddleware::class);
 
-$app->get('/reset/{token}', \App\Controller\UserController::class . ':resetPassword');
+$app->get('/password/{token}', \App\Controller\UserController::class . ':enterPassword');
