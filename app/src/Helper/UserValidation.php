@@ -22,7 +22,7 @@ trait UserValidation
         $validation = $validator->make($params, [
             'username' => 'required|alpha_num',
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|max:20',
         ]);
 
         $validation->validate();
@@ -67,7 +67,7 @@ trait UserValidation
 
         $validation = $validator->make($params, [
             'username' => 'required|alpha_num',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|max:20',
         ]);
 
         $validation->validate();
@@ -81,6 +81,8 @@ trait UserValidation
 
             return $msgErrors;
         }
+
+        return [];
 
     }
 
@@ -95,7 +97,7 @@ trait UserValidation
         $validator = new Validator();
 
         $validation = $validator->make($params, [
-            'new-password' => 'required|min:6',
+            'new-password' => 'required|min:6|max:20',
         ]);
 
         $validation->validate();
@@ -110,6 +112,7 @@ trait UserValidation
             return $msgErrors;
         }
 
+        return [];
     }
 
     /**
