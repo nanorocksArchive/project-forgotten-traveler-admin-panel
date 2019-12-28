@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Score extends Model {
 
+    /**
+     * @var string
+     */
     protected $table = 'scores';
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     protected function setKeysForSaveQuery($query)
     {
         $query
