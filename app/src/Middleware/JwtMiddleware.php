@@ -9,6 +9,12 @@ use Gamegos\JWS\Exception\MalformedSignatureException;
 
 class JwtMiddleware
 {
+    /**
+     * @param $request
+     * @param $response
+     * @param $next
+     * @return mixed
+     */
     public function __invoke($request, $response, $next)
     {
         $config = require __DIR__ . '/../config.php';
