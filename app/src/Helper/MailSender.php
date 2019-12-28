@@ -6,7 +6,14 @@ use \Mailjet\Resources;
 
 trait MailSender
 {
-    public static function send($username, $email, $resetLink)
+    /**
+     * @param $container
+     * @param $username
+     * @param $email
+     * @param $resetLink
+     * @return bool
+     */
+    public static function send($container, $username, $email, $resetLink)
     {
         $config = require __DIR__ . '/../config.php';
 
@@ -30,9 +37,9 @@ trait MailSender
                             'Name' => $username
                         ]
                     ],
-                    'Subject' => sprintf("%s - New password", $config['mail']['senderName']),
+                    'Subject' => sprintf("%s - Reset password", $config['mail']['senderName']),
                     'TextPart' => "",
-                    'HTMLPart' => "<a href='" . $resetLink . "'>New password</a>",
+                    'HTMLPart' => self::htmlTemplate($resetLink),
                     'CustomID' => $config['mail']['customId']
                 ]
             ]
@@ -41,5 +48,14 @@ trait MailSender
         $response = $mj->post(Resources::$Email, ['body' => $body]);
 
         return $response->success();
+    }
+
+    /**
+     * @param $resetLink
+     * @return string
+     */
+    private static function htmlTemplate($resetLink)
+    {
+        return "<a href='" . $resetLink . "'>Reset password</a>";
     }
 }
