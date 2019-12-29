@@ -5,7 +5,7 @@ return [
     'addContentLengthHeader'=> false,
     'db' => [
         'driver' => 'mysql',
-        'host' => '107.189.6.84',
+        'host' => 'localhost',
         'database' => 'nankovmk_ftraveler_dev',
         'username' => 'nankovmk_ftraveler',
         'password' => 'iOYYjW!0jaR_nK+tKi',
